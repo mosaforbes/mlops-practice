@@ -3,15 +3,16 @@
 import argparse
 import glob
 import os
-
+import mlflow
 import pandas as pd
 
 from sklearn.linear_model import LogisticRegression
-
+from mlflow import sklearn
 
 # define functions
 def main(args):
     # TO DO: enable autologging
+    mlflow.autolog() #enable autologging for all parameters
 
 
     # read data
@@ -21,7 +22,8 @@ def main(args):
     X_train, X_test, y_train, y_test = split_data(df)
 
     # train model
-    train_model(args.reg_rate, X_train, X_test, y_train, y_test)
+    with mlflow.start_run() as run:
+        train_model(args.reg_rate, X_train, X_test, y_train, y_test)
 
 
 def get_csvs_df(path):
