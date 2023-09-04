@@ -36,7 +36,7 @@ def get_csvs_df(path):
     return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
 
 
-def split_data(df):
+def split_data(df): #Split the data 
     X, y = df[['Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure', 'TricepThickness', 'SerumInsulin', 'BMI', 'DiabetesPedigree', 'Age']].values, df['Diabetic'].values
     return train_test_split(X, y, test_size=0.30, random_state=0)
 
